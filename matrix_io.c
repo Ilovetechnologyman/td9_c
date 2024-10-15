@@ -106,33 +106,40 @@ matrix addition(struct matrix *mat1,struct matrix *mat2){
 }
 
 int is_triangular(struct matrix *mat){
-	int i;
-	int sup;
+	int i,j;
+    int ph=0;
+    int pb=0;
 	if (mat->lines != mat->cols){
-		return 0;
+		return 0; //la matrice n'est pas carré 
 	}
-	for(i=0;i<mat->lines;i++){
-		for(int j=1+i;j<=mat->lines;j++){
-			if(mat->m[i][j] != 0){
-			break;
-			}
-			if(j==mat->lines){
-				sup = 1;
-			}
-		}
-	}	
-	for(int j=0;j<mat->lines;j++){
-		for(i=j+1;i<=mat->lines;i++){
-			if(mat->m[i][j] != 0 && sup ==1){
-				if(sup == 1){
-				return 1;
-				}
-				return 0;
-			}	
-			if(j==mat->lines){
-				return 3;
+    //on regarde la partie haute,
+	for(i=0;i<(mat->lines)-1;i++){
+		for(j=1+i;j<(mat->lines);j++){
+            if(mat->m[i][j] != 0){
+                printf("pas haute \n");
+                ph = 1;
 			}
 		}
 	}
+    //on regarde la partie basse, 	
+    for(j=0;j<mat->lines;j++){
+		for(i=(mat->lines)-1;i>j;i--){
+            if(mat->m[i][j] != 0){
+                printf("pas basse \n");
+                pb = 1;
+			}
+		}
+	}
+    //resulat : 
+    if(pb==ph){
+        if(ph==1){
+            return 1; //matrice diagonale
+        }
+            return 0; //matrice non trianguraire
+    }
+    if(pb ==1){
+        return 2; //matrice triangualaire en bas
+    }
+    return 3; //matrice triangulaire en haut 
 }
 // Fonction pour écrire la matrice dans un fichier

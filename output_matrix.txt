@@ -1,0 +1,4 @@
+les dimensions de la matrice sont :3 3 
+2 4 6 
+0 0 8 
+0 0 0 
